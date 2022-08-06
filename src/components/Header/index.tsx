@@ -1,8 +1,15 @@
-import { Image, TextInput, TouchableOpacity, View } from "react-native";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { Image, TextInput, TouchableOpacity, View, Text } from "react-native";
 
 import { styles } from "./styles";
 
-export function Header() {
+type IProps = {
+  onAddTask: (title: string) => void;
+};
+
+export function Header({ onAddTask }: IProps) {
+  const [title, setTitle] = useState("");
+
   return (
     <View style={styles.header}>
       <Image source={require("../../../assets/logo.png")} />
@@ -12,9 +19,11 @@ export function Header() {
           style={styles.taskInput}
           placeholder="Adicione uma nova tarefa"
           placeholderTextColor="#808080"
+          onChangeText={setTitle}
+          value={title}
         />
 
-        <TouchableOpacity style={styles.buttonTask}>
+        <TouchableOpacity style={styles.buttonTask} onPress={() => onAddTask(title)}>
           <Image source={require("../../../assets/btnAdd.png")} />
         </TouchableOpacity>
       </View>

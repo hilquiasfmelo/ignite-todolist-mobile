@@ -2,42 +2,32 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   tasks: {
+    // width: '100%',
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     backgroundColor: "#333333",
     borderRadius: 8,
-    marginHorizontal: 24,
-    padding: 20,
-    marginBottom: 8
+    padding: 16,
+    marginHorizontal: 20,
+    marginBottom: 8,
   },
   checkContainer: {
-    minWidth: 25,
-    height: 25,
-    marginRight: 11.27
+    minWidth: 20,
+    height: 20,
   },
   checkButton: {
     width: "100%",
     height: "100%",
     borderRadius: 999,
     borderWidth: 2,
-    borderColor: '#4EA8DE',
+    borderColor: "#4EA8DE",
     backgroundColor: "transparent",
   },
   titleTask: {
-    marginRight: 'auto',
-    color: '#F2F2F2',
+    fontSize: 14,
     lineHeight: 22,
-    fontSize: 16
+    color: '#f2f2f2',
+    alignItems: 'flex-start'
   },
-  deleteButton: {
-    width: 32,
-    height: 32,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  deleteButtonIcon: {
-    minWidth: 20,
-    height: 20,
-  }
 });
