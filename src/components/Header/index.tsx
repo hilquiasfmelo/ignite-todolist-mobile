@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useState } from "react";
 import { Image, TextInput, TouchableOpacity, View, Text } from "react-native";
 
 import { styles } from "./styles";
@@ -9,6 +9,12 @@ type IProps = {
 
 export function Header({ onAddTask }: IProps) {
   const [title, setTitle] = useState("");
+
+  function handleAddTask() {
+    onAddTask(title);
+
+    setTitle('');
+  }
 
   return (
     <View style={styles.header}>
@@ -23,7 +29,7 @@ export function Header({ onAddTask }: IProps) {
           value={title}
         />
 
-        <TouchableOpacity style={styles.buttonTask} onPress={() => onAddTask(title)}>
+        <TouchableOpacity style={styles.buttonTask} onPress={handleAddTask}>
           <Image source={require("../../../assets/btnAdd.png")} />
         </TouchableOpacity>
       </View>

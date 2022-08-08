@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
-import {v4} from 'uuid';
 import { StatusBar, View } from "react-native";
+import uuid from "react-native-uuid";
 import { Header } from "./src/components/Header";
 import { Tasks } from "./src/screens/Tasks";
 
@@ -8,17 +8,20 @@ export type ITask = {
   id: string;
   title: string;
   isDone: boolean;
-}
+};
 
 export default function App() {
   const [tasks, setTasks] = useState<ITask[]>([]);
 
   function addTask(title: string) {
-    setTasks([...tasks, {
-      id: '1',
-      title,
-      isDone: false
-    }])
+    setTasks([
+      ...tasks,
+      {
+        id: String(uuid.v4()),
+        title,
+        isDone: false,
+      },
+    ]);
   }
 
   return (

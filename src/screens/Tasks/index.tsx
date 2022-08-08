@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { ITask } from "../../../App";
 import { TaskItem } from "../../components/TaskItem";
 
@@ -8,7 +8,7 @@ interface IProps {
   tasks: ITask[];
 }
 
-export function Tasks({tasks}: IProps) {
+export function Tasks({ tasks }: IProps) {
   const tasksQuantity = tasks.length;
   const completedTasks = tasks.filter((task) => task.isDone).length;
 
@@ -22,17 +22,35 @@ export function Tasks({tasks}: IProps) {
 
         <View style={styles.tasksCreated}>
           <Text style={styles.tasksItemFinished}>Concluídas</Text>
-          <Text style={styles.countTasks}>{completedTasks} de {tasksQuantity}</Text>
+          <Text style={styles.countTasks}>
+            {completedTasks} de {tasksQuantity}
+          </Text>
         </View>
       </View>
 
       <View style={styles.taskItem}>
-        {tasks.map(task => (
-          <TaskItem
-            key={task.id}
-            task={task}
-          />
+        {tasks.map((task) => (
+          <TaskItem key={task.id} task={task} />
         ))}
+      </View>
+
+      <View>
+        {tasks.length <= 0 && (
+          <View style={styles.emptyContainer}>
+            <Image
+              style={styles.emptyImg}
+              source={require("../../../assets/empty.png")}
+            />
+            <View style={styles.emptyText}>
+              <Text style={styles.emptyTextBold}>
+                Você ainda não tem tarefas cadastradas
+              </Text>
+              <Text style={styles.emptyTextNormal}>
+                Crie tarefas e organize seus itens a fazer
+              </Text>
+            </View>
+          </View>
+        )}
       </View>
     </View>
   );
