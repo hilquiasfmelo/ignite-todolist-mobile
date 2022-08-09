@@ -6,9 +6,11 @@ import { styles } from "./styles";
 
 interface IProps {
   tasks: ITask[];
+  onDeleteTask: (id: string) => void;
+  onCompletedTask: (id: string) => void;
 }
 
-export function Tasks({ tasks }: IProps) {
+export function Tasks({ tasks, onDeleteTask, onCompletedTask }: IProps) {
   const tasksQuantity = tasks.length;
   const completedTasks = tasks.filter((task) => task.isDone).length;
 
@@ -30,7 +32,12 @@ export function Tasks({ tasks }: IProps) {
 
       <View style={styles.taskItem}>
         {tasks.map((task) => (
-          <TaskItem key={task.id} task={task} />
+          <TaskItem
+            key={task.id}
+            task={task}
+            onDeleteTask={onDeleteTask}
+            onCompletedTask={onCompletedTask}
+          />
         ))}
       </View>
 

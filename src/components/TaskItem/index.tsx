@@ -4,19 +4,33 @@ import { styles } from "./styles";
 
 interface IProps {
   task: ITask;
+  onDeleteTask: (id: string) => void;
+  onCompletedTask: (id: string) => void;
 }
 
-export function TaskItem({ task }: IProps) {
+export function TaskItem({ task, onDeleteTask, onCompletedTask }: IProps) {
   return (
     <View style={styles.tasks}>
-      <TouchableOpacity style={styles.checkContainer}>
-        <View style={styles.checkButton} />
+      <TouchableOpacity
+        style={styles.checkContainer}
+        onPress={() => onCompletedTask(task.id)}
+      >
+        {task.isDone ? (
+          <Image style={styles.checkImg} source={require("../../../assets/check.png")} />
+        ) : (
+          <View style={styles.checkButton} />
+        )}
       </TouchableOpacity>
 
-      <Text style={styles.titleTask}>{task.title}</Text>
+      <Text style={task.isDone ? styles.taskTextCompleted : styles.titleTask}>
+        {task.title}
+      </Text>
 
-      <TouchableOpacity>
-        <Image source={require("../../../assets/trash.png")} />
+      <TouchableOpacity onPress={() => onDeleteTask(task.id)}>
+        <Image
+          style={styles.trash}
+          source={require("../../../assets/trash.png")}
+        />
       </TouchableOpacity>
     </View>
   );
